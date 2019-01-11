@@ -1,0 +1,11 @@
+<div class="comp" tabindex="0" (keydown)="handleKeydown($event)" (keyup)="handleKeyup($event)">
+  <div class="box" [@anima_boxTop]="isOpen ? 'open' : 'closed'"></div>
+  <div class="box bottomBox" 
+      [@anima_boxBottom]="isBrother ? 'bros' : isOpen ? 'open' : 'closed'"></div>
+  <div class="pgn">{{isOpen ? answer : ''}}</div>
+  <div class="bros">{{isBrother ? hail : ''}}</div>
+  <fa-icon class="pawn" [@chessPiece]="isOpen ? 'open' : 'closed'" [icon]="faChessPawn"></fa-icon>
+  <div class="text" 
+       (touchstart)="handleMouseDown($event)" (touchend)="handleMouseUp($event)"
+       [@anima_text]="isOpen ? 'open' : 'closed'">{{isOpen ? title1 : title0}}</div>
+</div>
