@@ -1,0 +1,11 @@
+{
+    "stages" : [
+        {
+            "id": 0,
+            "type": "RDBRO", 
+            "message":"Hail Thee Brother",
+            "title": "BRINGING FUN BACK 2019",
+            "log": "We Hail Thee Brother!!"
+        }
+    ]
+}
