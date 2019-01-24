@@ -4,32 +4,37 @@
 }
 .text {
     margin: auto; 
-    width: 100%; 
+    width: 100%;
+    padding-top: 42px;
+}
+
+.absText {
+    margin: auto; 
+    width: 100%;
     position: absolute;
-    top: 42%;
+    bottom: 50%;
 }
 
 .pgn {
     margin: auto; 
     width: 100%; 
-    position: absolute;
-    top: 20%;
+    padding-top: 20%;
     color: black;
 }
 
 .bros {
-    margin: auto; 
+    /* margin: auto; 
     width: 100%; 
     position: absolute;
     top: 31.4%;
-    font-size: 100%;
+    font-size: 100%; */
     color: #ffce00;
 }
 
 .pawn {
     width: 100%; 
     position: absolute;
-    top: 25%;
+    top: 18%;
     left: 0px;
     color: white;
     font-size: 200%;
@@ -44,4 +49,10 @@
     background-color: white;
     position: absolute;
     top: 50%;
+}
+
+.keyHolePosition {
+    position: absolute;
+    left: calc(50% - 30px);
+    top: calc(50% - 30px);
 }

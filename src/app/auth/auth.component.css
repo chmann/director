@@ -1,0 +1,41 @@
+.authComponent {
+    width: 100%;
+    height: 100%;
+    background-color: darkred;
+}
+
+.classification {
+   font-size: 36px; 
+}
+
+.invalidAuthComponent {
+    display: none;
+}
+
+.authMessage {
+    font-size: 30px;
+    margin-top: 20%;
+}
+
+.authNote {
+    padding: 5px;
+    font-size: .42em;
+    margin-top: 42px;
+}
+
+.authImg {
+    height: 15%;
+    margin-top: 42px;
+}
+
+.sealImg {
+    height: 100%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    height: 15%;
+    width: 100%;
+    /* left: calc(50% - 73px); */
+}

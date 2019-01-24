@@ -8,11 +8,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello/hello.component';
+import { DragdivComponent } from './dragdiv/dragdiv.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HelloComponent
+    HelloComponent,
+    DragdivComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

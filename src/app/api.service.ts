@@ -14,11 +14,23 @@ export class ApiService {
 
   constructor(private http : HttpClient) { }
 
+  buildURL(route, params) {
+    return environment.apiUrl + route + params; 
+  }
+
+  buildOptions() {
+    return {headers: {'Authorization': localStorage.tokeN || ''}};
+  }
+
   getToken(vals :any[]) {
     let params = '';
     vals.forEach(element => {
       params += '/' + element;
     });
-    return this.http.get(environment.apiUrl + '/authbros' + params);
+    return this.http.get(this.buildURL('/authbros', params),this.buildOptions());
+  }
+
+  getContent(path :string) {
+    return this.http.get(this.buildURL('/Content/' + path, ''),this.buildOptions());
   }
 }

@@ -1,0 +1,20 @@
+<div class='draggable' [ngClass]="dragging ? 'dragging' : ''"
+     [ngStyle]="{
+       'width.px': width, 
+       'height.px' : height,
+       'z-index': z,
+       'top.px' : top,
+       'left.px': left, 
+       'background-color': backgroundColor
+      }"
+      [@dropTrigger]="isTriggered ? 'open' : 'closed'"    
+>
+<img [src]='image'class='dragImage'
+     (touchstart)="dragStart($event)"
+     (touchend)="dragEnd($event)"
+     (touchmove)="handleDrag($event)"
+     (mousedown)="dragStart($event)"
+     (mouseleave)="dragEnd($event)"
+     (mouseup)="dragEnd($event)"
+     (mousemove)="handleDrag($event)"/>
+</div>

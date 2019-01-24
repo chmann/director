@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://www.cmann.org:8443/api'
+  apiUrl: 'https://www.godirector.org:8443/api'
 };

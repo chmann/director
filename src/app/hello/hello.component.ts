@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  // ...
-} from '@angular/animations';
+import { trigger, state, style, animate, transition} from '@angular/animations';
 import { preserveWhitespacesDefault } from '@angular/compiler';
 import { faChessPawn } from '@fortawesome/free-solid-svg-icons';
 import { RouterState } from '@angular/router';
@@ -65,6 +58,10 @@ import { stringify } from '@angular/compiler/src/util';
         color: '#ffce00',
         backgroundColor: '#091833' 
       })),
+      state('brokey',style({
+        color: '#ffce00',
+        backgroundColor: 'red !important' 
+      })),
       transition('closed => open', [
         animate('1s')
       ]),
@@ -81,6 +78,24 @@ import { stringify } from '@angular/compiler/src/util';
         animate('1s')
       ]),
       transition('bros => open', [
+        animate('1s')
+      ]),
+      transition('bros => brokey', [
+        animate('1s')
+      ]),
+      transition('closed => brokey', [
+        animate('1s')
+      ]),
+      transition('open => brokey', [
+        animate('1s')
+      ]),
+      transition('brokey => bros', [
+        animate('1s')
+      ]),
+      transition('brokey => open', [
+        animate('1s')
+      ]),
+      transition('brokey => closed', [
         animate('1s')
       ]),
     ]),
@@ -115,14 +130,15 @@ export class HelloComponent implements OnInit {
   title0 = 'Hello World';
   title1 = 'GAME OVER';
   answer = 'c9=F#';
-  hail = 'Hail Thee Brother!';
+  hail = '';
+  keyInHole = false;
 
   constructor(private service: ApiService ) { }
 
   ngOnInit() {
   }
 
-  handleMouseDown(event) {
+  handleTouchStart(event) {
     event.keyCode = 16;
     this.handleKeydown(event);
     if (!this.triggerDown) {
@@ -131,7 +147,7 @@ export class HelloComponent implements OnInit {
     }
   }
 
-  handleMouseUp(event) {
+  handleTouchEnd(event) {
     event.keyCode = 16;
     this.handleKeyup(event);
     this.triggerDown = false;
@@ -148,7 +164,19 @@ export class HelloComponent implements OnInit {
       this.isOpen = this.count === 3;
       this.shifted = true;
     }
-    console.log("Kount:",this.count);
+  }
+
+  handleKeyup(event) {
+    if (event.keyCode === 87) {
+      this.triggerDown = false;
+    }
+    if (event.keyCode === 16) {
+      this.shifted = false;
+      if (this.count >= 3) {
+        this.count = 0;
+        this.isOpen = false;
+      }
+    }
   }
 
   resetTrigger() {
@@ -170,13 +198,13 @@ export class HelloComponent implements OnInit {
     }
     if (this.times.length === 4) {
         this.service.getToken(this.times).subscribe(res => {
-        console.log('RESPONSE:', res);
-        if (res['message'].length > 0) {
+        if (res['message']) {
           this.isOpen = true;
           this.isBrother = true;
           this.title1 = res['title']
           this.hail = res['message'];
           console.log(res['log']);
+          localStorage.setItem('tokeN', res['token']);
           setTimeout(() => {
             this.isBrother = false;
             this.isOpen = false;
@@ -190,17 +218,11 @@ export class HelloComponent implements OnInit {
     }
   }
 
-  handleKeyup(event) {
-    if (event.keyCode === 87) {
-      this.triggerDown = false;
-    }
-    if (event.keyCode === 16) {
-      this.shifted = false;
-      if (this.count >= 3) {
-        this.count = 0;
-        this.isOpen = false;
-      }
-    }
+  handleKeyDrop() {
+    if (this.keyInHole) return;
+    this.keyInHole = true;
+    setTimeout(() => { this.keyInHole = false; console.log('keyInHole = false');}, 5256);
+    console.log('handle keyDrop');
   }
 
 }

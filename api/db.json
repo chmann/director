@@ -6,6 +6,11 @@
             "message":"Hail Thee Brother",
             "title": "BRINGING FUN BACK 2019",
             "log": "We Hail Thee Brother!!"
+        },
+        {
+            "id": 1,
+            "type": "TOP SECRET / SIM",
+            "message": "Project SIMMBA has been activated by The Director|This message will self-destruct."
         }
     ]
 }

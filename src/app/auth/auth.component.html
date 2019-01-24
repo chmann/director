@@ -1,0 +1,16 @@
+<div [ngClass]="{'authComponent' : valid, 'invalidAuthComponent': !valid}">
+    <div class="classification">
+        {{classification}}
+    </div>
+    <div class="authMessage">
+      {{authMessage}}
+    </div>
+    <img src="../../assets/img/learning.png" class="authImg"/>
+    <div class ="authNote">
+        {{authNote}} ({{destructTime}}s)
+    </div>
+    <div class="footer">
+      <a href="https://youtu.be/J5jIpAeYwPo"><img src="../../assets/img/seal.png" class="sealImg"/></a>
+    </div>
+    
+</div>

@@ -12,7 +12,8 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "express-cors": "0.0.3"
+    "express-cors": "0.0.3",
+    "jsonwebtoken": "^8.4.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0"

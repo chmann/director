@@ -1,0 +1,13 @@
+.draggable {
+    position: absolute;
+    z-index: 3;
+}
+
+.dragging {
+    z-index: 999;
+}
+
+.dragImage {
+    width: 100%;
+    height: 100%;
+}
