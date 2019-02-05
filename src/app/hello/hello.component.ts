@@ -154,6 +154,12 @@ export class HelloComponent implements OnInit {
   }
 
   handleKeydown(event) {
+    if (event.keyCode === 27) {
+      this.triggerDown = false;
+      this.isOpen = false;
+      this.shifted = false;
+      this.resetTrigger();
+    }
     if (event.keyCode === 87 && !this.triggerDown) {
       this.triggerDown = true;
       this.handleTrigger(event);
@@ -211,7 +217,7 @@ export class HelloComponent implements OnInit {
             this.title1 = "GAME OVER";
             this.hail = '';
             this.resetTrigger();
-          }, 12420);
+          }, 42420);
         }
       });;
       this.resetTrigger();

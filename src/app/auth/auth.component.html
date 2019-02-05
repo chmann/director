@@ -1,16 +1,16 @@
-<div [ngClass]="{'authComponent' : valid, 'invalidAuthComponent': !valid}">
-    <div class="classification">
+<div [ngClass]="{'authComponent' : valid, 'invalidAuthComponent': !valid}" [@fade]="initialized ? 'post' : 'pre'">
+    <div class="classification" >
         {{classification}}
     </div>
-    <div class="authMessage">
+    <div class="authMessage" >
       {{authMessage}}
     </div>
-    <img src="../../assets/img/learning.png" class="authImg"/>
+    <img [src]="authImage" class="authImg" />
     <div class ="authNote">
         {{authNote}} ({{destructTime}}s)
     </div>
     <div class="footer">
-      <a href="https://youtu.be/J5jIpAeYwPo"><img src="../../assets/img/seal.png" class="sealImg"/></a>
+      <a href="https://youtu.be/J5jIpAeYwPo"><img [src]="footerImage" class="sealImg" /></a>
     </div>
     
 </div>

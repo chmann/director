@@ -1,6 +1,6 @@
 <div class="appBackground">
-  <div class="appContainer">
-    <router-outlet></router-outlet>
+  <div class="appContainer" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </div>
 

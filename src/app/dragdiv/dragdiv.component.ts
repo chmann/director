@@ -5,17 +5,19 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dragdiv',
-  inputs: ['image', 'y', 'x', 'w', 'h', 'z', 'dropCallback'],
+  inputs: ['image', 'y', 'x', 'w', 'h', 'z', 'dropCallback', 'lock'],
   templateUrl: './dragdiv.component.html',
   styleUrls: ['./dragdiv.component.css'],
   animations: [
     trigger('dropTrigger', [
       state('closed', style({
-        transform: 'scale(1)'
+        transform: 'scale(1)',
+        opacity: 1
       })),
       state('open', style({
         transform: 'scale(42)',
-        zIndex: 1001
+        zIndex: 1001,
+        opacity: 0.1
       })),
       transition('closed => open', [
         animate('4.12s')
@@ -43,6 +45,7 @@ export class DragdivComponent implements OnInit {
   dragid : string;
   isTriggered = false;
   self : DragdivComponent;
+  lock : false;
 
   constructor(elem: ElementRef, private service: DragService, private router: Router) {
     this.thisComponent = elem.nativeElement;
@@ -75,6 +78,7 @@ export class DragdivComponent implements OnInit {
   }
 
   dragStart(e) {
+    if (this.lock) return;
     if (e.touches) {
       e = e.touches[0]
     }
@@ -91,7 +95,7 @@ export class DragdivComponent implements OnInit {
   }
 
   handleDrag(e) {
-    if (!this.dragging) return;
+    if (!this.dragging || this.lock) return;
     e.preventDefault();
     if (e.touches) {
       e = e.touches[0]
