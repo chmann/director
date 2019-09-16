@@ -1,0 +1,7 @@
+{
+    "short_name": "101010",
+    "name": "Hello World",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait"
+  }

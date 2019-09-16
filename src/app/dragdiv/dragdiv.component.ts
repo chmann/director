@@ -45,7 +45,8 @@ export class DragdivComponent implements OnInit {
   dragid : string;
   isTriggered = false;
   self : DragdivComponent;
-  lock : false;
+  lock = false;
+  updatingPosition = false;
 
   constructor(elem: ElementRef, private service: DragService, private router: Router) {
     this.thisComponent = elem.nativeElement;
@@ -60,16 +61,17 @@ export class DragdivComponent implements OnInit {
     this.height = this.h || this.w || 100;
     this.dragid = this.guidGenerator();
     this.setBounds();
+
+    //Ensure Drag End is called when mouseup occurs when mouse is no longer over target
+    document.addEventListener("mouseup", () => {this.dragEnd(null);});
   }
 
   setBounds() {
     this.bounds = this.thisComponent.children[0].getBoundingClientRect();
     this.service.addUpdateTarget(this.dragid, this.bounds, this.handleDrop, this);
-    console.log(this.bounds);
   }
 
   handleDrop() {
-    console.log(this, 'Dropped!')
     if (this.dropCallback) this.dropCallback();
     if (this['obj']) {
       this['obj'].isTriggered = true;
@@ -100,11 +102,13 @@ export class DragdivComponent implements OnInit {
     if (e.touches) {
       e = e.touches[0]
     }
+    this.updatingPosition = true;
     let diff = {x: e.clientX - this.lastPoint.x, y: e.clientY - this.lastPoint.y};
     this.top += diff.y;
     this.left += diff.x;
     this.lastPoint.x = e.clientX;
     this.lastPoint.y = e.clientY;
+    this.updatingPosition = false;
   }
 
   guidGenerator() {

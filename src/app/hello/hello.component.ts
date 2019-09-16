@@ -136,6 +136,7 @@ export class HelloComponent implements OnInit {
   constructor(private service: ApiService ) { }
 
   ngOnInit() {
+    setTimeout(() => window.scrollTo(0,1), 1000); 
   }
 
   handleTouchStart(event) {
