@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DragdivComponent } from './dragdiv.component';
+import { DragComponent } from './drag.component';
 
-describe('DragdivComponent', () => {
-  let component: DragdivComponent;
-  let fixture: ComponentFixture<DragdivComponent>;
+describe('DragComponent', () => {
+  let component: DragComponent;
+  let fixture: ComponentFixture<DragComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DragdivComponent ]
+      declarations: [ DragComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DragdivComponent);
+    fixture = TestBed.createComponent(DragComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

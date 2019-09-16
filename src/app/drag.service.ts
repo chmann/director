@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { registerContentQuery } from '@angular/core/src/render3';
-import { DragdivComponent } from './dragdiv/dragdiv.component';
+import { DragComponent } from './drag/drag.component';
 
 @Injectable({
   providedIn: 'root'
@@ -45,15 +44,17 @@ export class DragService {
     return false;
   }
 
-  addUpdateTarget(id : string, target : DOMRect, callback : Function, dragdiv: DragdivComponent) {
+  Update(id : string, target : DOMRect, callback : Function, drag: DragComponent) {
     for (let i = 0; i < this.registry.length; i++) {
       if (this.registry[i].id === id) {
         this.registry[i].target = target;
         if (callback) this.registry[i].callback = callback;
-        if (dragdiv) this.registry[i].obj = dragdiv;
+        if (drag) this.registry[i].obj = drag;
         return;
       };
     }
-    this.registry.push({id: id, target: target, callback: callback, obj: dragdiv});
+    this.registry.push({id: id, target: target, callback: callback, obj: drag});
   }
+  
 }
+

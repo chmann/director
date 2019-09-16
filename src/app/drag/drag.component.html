@@ -12,8 +12,7 @@
 <img [src]='image'class='dragImage'
      (touchstart)="dragStart($event)"
      (touchend)="dragEnd($event)"
-     (touchmove)="handleDrag($event)"
      (mousedown)="dragStart($event)"
-     (mouseup)="dragEnd($event)"
-     (mousemove)="handleDrag($event)"/>
+     (touchmove)="handleDrag($event)"
+     />
 </div>

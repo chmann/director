@@ -11,15 +11,15 @@
     </div>
   </div>
   
-  <app-dragdiv [image]="'assets/img/SuperKey.png'" [z]="10" [w]="60" [hidden]="!isBrother"></app-dragdiv>
+  <app-drag [image]="'assets/img/SuperKey.png'" [z]="10" [w]="60" [hidden]="!isBrother"></app-drag>
   <fa-icon class="pawn" [@chessPiece]="isOpen ? 'open' : 'closed'" [icon]="faChessPawn"></fa-icon>
 
   <div class="box bottomBox" 
     [@anima_boxBottom]="keyInHole ? 'brokey' : (isBrother ? 'bros' : isOpen ? 'open' : 'closed')">
        <div class="keyHolePosition">
-           <app-dragdiv [image]="'assets/img/Keyhole.png'" [w]="60" [hidden]="!isBrother"
+           <app-drag [image]="'assets/img/Keyhole.png'" [w]="60" [hidden]="!isBrother"
                         [dropCallback]="handleKeyDrop" [lock]="true">
-           </app-dragdiv>
+           </app-drag>
        </div>
    </div>
 </div>
