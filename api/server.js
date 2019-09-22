@@ -21,7 +21,7 @@ const app = express();
 if(process.env.NODE_ENV === 'production') {
     // We are running in production mode - Enable SSL
     var options = {
-        pfx: fs.readFileSync('sslcert/godirector.pfx'),
+        pfx: fs.readFileSync('sslcert/cmann.pfx'),
         passphrase: 'password'
     };
     var httpsServer = https.createServer(options,app).listen(8443, function(){
@@ -36,8 +36,8 @@ if(process.env.NODE_ENV === 'production') {
 //Server Configuration
 app.all('*', function(req, res, next) {
     if(process.env.NODE_ENV === 'production') {
-        res.header("Access-Control-Allow-Origin", "https://www.godirector.org");
-        //res.header("Access-Control-Allow-Origin", "https://www.cmann.org");
+        //res.header("Access-Control-Allow-Origin", "https://www.godirector.org");
+        res.header("Access-Control-Allow-Origin", "https://www.cmann.org");
     }
     else {
         res.header("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -58,7 +58,7 @@ app.get('/api/authbros/*',(req, res) => {
     let t2 = times[2];
     let t3 = times[3];
     let result = {};
-    if ( t0 > thresh/2 && t1 > thresh && t3 > thresh/2 && t2 > thresh/2 &&
+    if (t0 > thresh/2 && t1 > thresh && t3 > thresh/2 && t2 > thresh/2 &&
          Math.abs(3.4 * t0 - t1) <= thresh &&
          Math.abs(1.3 * t1 - t2) <= thresh &&
          Math.abs(t0 - t3) <= thresh) {

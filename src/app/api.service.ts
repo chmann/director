@@ -27,6 +27,7 @@ export class ApiService {
     vals.forEach(element => {
       params += '/' + element;
     });
+    console.log(this.buildURL('/authbros', params));
     return this.http.get(this.buildURL('/authbros', params),this.buildOptions());
   }
 

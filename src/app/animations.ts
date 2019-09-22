@@ -58,10 +58,10 @@ export const fadeRouteAnimation = trigger('fadeAnimation', [
 export const fadeInAnimation =
   trigger('fade', [
     state('pre', style({
-      opacity: 0
+      opacity: 0.0
     })),
     state('post', style({
-      opacity: 1
+      opacity: 100
     })),
     transition('pre => post', [
       animate('2.0s')

@@ -29,12 +29,20 @@
     top: 31.4%;
     font-size: 100%; */
     color: #ffce00;
+    padding-top: 60px;
+    margin: 0px 10px;
+}
+
+@media (max-height: 629px) {
+    .bros {
+        font-size: 42%
+    }
 }
 
 .pawn {
     width: 100%; 
     position: absolute;
-    top: 18%;
+    top: calc(25% - 47.25px);
     left: 0px;
     color: white;
     font-size: 200%;

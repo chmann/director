@@ -12,6 +12,7 @@ import { fadeRouteAnimation } from './animations';
 })
 export class AppComponent {
   title = 'director';
+  $: any;
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];

@@ -6,11 +6,18 @@
       {{authMessage}}
     </div>
     <img [src]="authImage" class="authImg" />
-    <div class ="authNote">
+    <div class ="authNote" [hidden]="destructTime === 0 || silentCountdown">
         {{authNote}} ({{destructTime}}s)
     </div>
     <div class="footer">
-      <a href="https://youtu.be/J5jIpAeYwPo"><img [src]="footerImage" class="sealImg" /></a>
+      <a (click)="toggleVideo()"><img [src]="footerImage" class="sealImg" /></a>
     </div>
-    
+    <div id="videoContainer" class="videoContainer">
+      <div></div>
+    </div>
+    <div class="overrideMessage" [@fade]="overridePulsing ? 'post' : 'pre'">
+      {{overrideMessage}}
+    </div>
 </div>
+
+

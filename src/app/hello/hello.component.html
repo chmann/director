@@ -1,7 +1,7 @@
 <div class="comp" tabindex="0" (keydown)="handleKeydown($event)" (keyup)="handleKeyup($event)">
   <div class="box" [@anima_boxTop]="isOpen ? 'open' : 'closed'">
     
-    <div class="pgn" [hidden]="isBrother">{{isOpen ? answer : ''}}</div>
+    <div class="pgn" [hidden]="isBrother"><a href="https://en.wikipedia.org/wiki/Omega_Chess" style="color: black; text-decoration: none;">{{isOpen ? answer : ''}}</a></div>
     <div class="pgn bros">{{isBrother ? hail : ''}}</div>
     
     <div class="absText" 
@@ -11,15 +11,15 @@
     </div>
   </div>
   
-  <app-drag [image]="'assets/img/SuperKey.png'" [z]="10" [w]="60" [hidden]="!isBrother"></app-drag>
+  <app-dragable [image]="'assets/img/SuperKey.png'" [z]="10" [w]="60" [hidden]="!isBrother"></app-dragable>
   <fa-icon class="pawn" [@chessPiece]="isOpen ? 'open' : 'closed'" [icon]="faChessPawn"></fa-icon>
 
   <div class="box bottomBox" 
     [@anima_boxBottom]="keyInHole ? 'brokey' : (isBrother ? 'bros' : isOpen ? 'open' : 'closed')">
        <div class="keyHolePosition">
-           <app-drag [image]="'assets/img/Keyhole.png'" [w]="60" [hidden]="!isBrother"
+           <app-dragable [image]="'assets/img/Keyhole.png'" [w]="60" [hidden]="!isBrother"
                         [dropCallback]="handleKeyDrop" [lock]="true">
-           </app-drag>
+           </app-dragable>
        </div>
    </div>
 </div>

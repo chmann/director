@@ -129,7 +129,7 @@ export class HelloComponent implements OnInit {
   faChessPawn = faChessPawn;
   title0 = 'Hello World';
   title1 = 'GAME OVER';
-  answer = 'c9=F#';
+  answer = 'c9=C#';//pawn is promoted to Champion for the Checkmate
   hail = '';
   keyInHole = false;
 

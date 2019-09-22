@@ -1,4 +1,4 @@
-<div class='draggable' [ngClass]="dragging ? 'dragging' : ''"
+<div class='draggable' [ngClass]="{'dragging': dragging, 'locked' : lock, 'conflicted': conflicted, 'valid': overValidTarget, 'off': conflictedOff}"
      [ngStyle]="{
        'width.px': width, 
        'height.px' : height,
@@ -7,12 +7,14 @@
        'left.px': left, 
        'background-color': backgroundColor
       }"
-      [@dropTrigger]="isTriggered ? 'open' : 'closed'"    
+      [@dropTrigger]="isTriggered ? 'open' : 'closed'" 
+      [@fade]="conflictedOff && conflicted ? 'pre' : 'post'"
 >
 <img [src]='image'class='dragImage'
      (touchstart)="dragStart($event)"
      (touchend)="dragEnd($event)"
      (mousedown)="dragStart($event)"
      (touchmove)="handleDrag($event)"
+     draggable="false"
      />
 </div>
