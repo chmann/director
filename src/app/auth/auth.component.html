@@ -6,6 +6,7 @@
       {{authMessage}}
     </div>
     <img [src]="authImage" class="authImg" />
+    <marquee behavior="scroll" scrollamount="1.6180" direction="up" style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em">{{scrollingText}}</marquee>
     <div class ="authNote" [hidden]="destructTime === 0 || silentCountdown">
         {{authNote}} ({{destructTime}}s)
     </div>

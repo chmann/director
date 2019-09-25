@@ -7,6 +7,7 @@ const http = require('http');
 const https = require('https');
 
 const express = require('express');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const devPort = 6180;
 
@@ -17,7 +18,7 @@ var stages = db.stages;
 
 //Start Server
 const app = express();
-
+app.use(compression());
 if(process.env.NODE_ENV === 'production') {
     // We are running in production mode - Enable SSL
     var options = {
@@ -92,6 +93,7 @@ app.get('/api/Content/bros', middleware.checkToken, (req, res) => {
     res.json({
         success: true,
         type: s.type,
-        message: s.message
+        message: s.message,
+        creed: s.creed
     });
 });

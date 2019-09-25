@@ -27,8 +27,10 @@
 }
 
 .authImg {
-    height: 15%;
-    margin-top: 42px;
+    position: absolute;
+    right: calc(50% - 65px);
+    bottom: calc(15% + 42px);
+    width: 118px;
 }
 
 .sealImg {
@@ -45,15 +47,7 @@
     margin-left: -150px;
 }
 
-@media (max-width: 999px) {
-    .videoContainer {
-        position: absolute;
-        z-index: 2;
-        top: 175px;
-        width: 80%;
-        margin-left: 10%;
-    }
-}
+
 
 .showVideo {
     left: 0px;
@@ -71,11 +65,25 @@
     /* left: calc(50% - 73px); */
 }
 
+@media (max-width: 699px) {
+    .videoContainer {
+        position: absolute;
+        z-index: 2;
+        bottom: 0px;
+        left: 10%;
+        width: 80%;
+    }
+
+    .footer {
+        bottom: 208px;
+    }
+}
+
 .videoFrame {
     max-height: 100px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 700px) {
     .overrideMessage {
         top: calc(50% - 210px);
         margin-left: -300px;

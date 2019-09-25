@@ -20,6 +20,7 @@ export class AuthComponent implements OnInit {
   initialized = false;
   footerImage = "";
   authImage = "";
+  scrollingText = "";
   overrideMessage = "GO";
   overridePulseRate = 1;
   overridePulsing =  false;
@@ -41,7 +42,10 @@ export class AuthComponent implements OnInit {
           this.authMessage = msgs[0];
           this.authNote = msgs[1];
           this.footerImage = '../../assets/img/seal.png';
-          //this.authImage = '../../assets/img/learning.png';
+          if (res["creed"]) {
+            this.scrollingText = res["creed"];
+          }
+          this.authImage = '../../assets/img/learning.png';
           this.initialized = true;
         }, 1000);
 
