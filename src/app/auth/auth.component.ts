@@ -89,6 +89,7 @@ export class AuthComponent implements OnInit {
           setInterval(() => this.destructTime--, 1000);
           setTimeout(() => {
             delete localStorage.tokeN;
+            clearInterval();
             this.router.navigate(['/']);
           }, this.destructTime * 1000);
         }
