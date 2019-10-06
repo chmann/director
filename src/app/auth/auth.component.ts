@@ -53,33 +53,37 @@ export class AuthComponent implements OnInit {
             var el = document.getElementById('star-wars');
             if (el) {
               this.creedClone = el.cloneNode(true);
-            }
-            setInterval(() => {
-              this.timer++;
-              if (this.timer > 36) {
-                this.timer = 0;
-                var temp = this.scrollingText;
-                if (this.creedIndex >= this.creed.length) {
-                  this.creedIndex = 0;
+              setInterval(() => {
+                this.timer++;
+                if (this.timer > 36) {
+                  this.timer = 0;
+                  var temp = this.scrollingText;
+                  if (this.creedIndex >= this.creed.length) {
+                    this.creedIndex = 0;
+                  }
+                  this.scrollingText = this.creed[this.creedIndex++];
+                  el = document.getElementById('star-wars');
+                  console.log('here we are');
+                  setTimeout(() => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; /* trigger reflow */
+                    el.style.animation = null;                     
+                  }, 118);
                 }
-                this.scrollingText = this.creed[this.creedIndex++];
-                el = document.getElementById('star-wars');
-                console.log('here we are');
-                setTimeout(() => {
-                  el.style.animation = 'none';
-                  el.offsetHeight; /* trigger reflow */
-                  el.style.animation = null; 
-                  // //Hack see: https://css-tricks.com/restart-css-animation/
-                  // el.classList.remove("crawl");
-                  // void el.offsetWidth;
-                  // el.classList.add("crawl");
-                  // el.before(el.cloneNode(true));
-                  // el.className += " active";
-                  //setTimeout(() => el.className.replace(" active", ""), 118);
-                  
-                }, 118);
+              }, 1000);
+            }
+            else {
+              el = document.getElementById('scrolling-text');
+              var creedHTML = '';
+              for (var i = 0; i < this.creed.length; i++) {
+                if (creedHTML.length) {
+                  creedHTML += '<br/><br/>'
+                }
+                creedHTML += this.creed[i];
               }
-            }, 1000);
+              el.innerHTML = creedHTML;
+            }
+            
           }
           this.authImage = '../../assets/img/learning.png';
           this.initialized = true;
