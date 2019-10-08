@@ -123,6 +123,7 @@ export class HelloComponent implements OnInit {
   shifted = false;
   triggerd = false;
   triggerDown = false;
+  trigger2Down = false;
   triggerStart: any = null;
   times = [];
   count = 0;
@@ -155,8 +156,10 @@ export class HelloComponent implements OnInit {
   }
 
   handleKeydown(event) {
+    console.log(event.keyCode);
     if (event.keyCode === 27) {
       this.triggerDown = false;
+      this.trigger2Down = false;
       this.isOpen = false;
       this.shifted = false;
       this.resetTrigger();
@@ -164,6 +167,10 @@ export class HelloComponent implements OnInit {
     if (event.keyCode === 87 && !this.triggerDown) {
       this.triggerDown = true;
       this.handleTrigger(event);
+    }
+    if (event.keyCode === 86 && !this.triggerDown) {
+      this.trigger2Down = true;
+      this.handleTrigger2(event);
     }
     if (this.shifted) return;
     if (event.keyCode === 16) {
@@ -176,6 +183,9 @@ export class HelloComponent implements OnInit {
   handleKeyup(event) {
     if (event.keyCode === 87) {
       this.triggerDown = false;
+    }
+    if (event.keyCode === 86) {
+      this.trigger2Down = false;
     }
     if (event.keyCode === 16) {
       this.shifted = false;
@@ -220,8 +230,39 @@ export class HelloComponent implements OnInit {
             this.resetTrigger();
           }, 42420);
         }
-      });;
+      });
       this.resetTrigger();
+    }
+  }
+
+  handleTrigger2(event) {
+    let now: any = new Date();
+    if (this.times.length === 0 && this.triggerStart === null) {
+      this.triggerStart = now;
+      return;
+    }
+    this.times.push(now - this.triggerStart);
+    this.triggerStart = now;
+    if (this.times[this.times.length - 1] > 6180) {
+      this.resetTrigger();
+      return;
+    }
+    if (this.times.length === 8) {
+      this.service.getToken(this.times, 'authvictory').subscribe(res => {
+        if (res['message']) {
+          this.isOpen = true;
+          this.isBrother = true;
+          console.log(res['log']);
+          localStorage.setItem('tokeN', res['token']);
+          setTimeout(() => {
+            this.isBrother = false;
+            this.isOpen = false;
+            this.title1 = "GAME OVER";
+            this.hail = '';
+            this.resetTrigger();
+          }, 42420);
+        }
+      });
     }
   }
 

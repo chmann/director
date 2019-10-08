@@ -22,13 +22,13 @@ export class ApiService {
     return {headers: {'Authorization': localStorage.tokeN || ''}};
   }
 
-  getToken(vals :any[]) {
+  getToken(vals :any[], path :string = 'authbros') {
     let params = '';
     vals.forEach(element => {
       params += '/' + element;
     });
-    console.log(this.buildURL('/authbros', params));
-    return this.http.get(this.buildURL('/authbros', params),this.buildOptions());
+    console.log(this.buildURL('/' + path, params));
+    return this.http.get(this.buildURL('/' + path, params),this.buildOptions());
   }
 
   getContent(path :string) {
