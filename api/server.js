@@ -9,7 +9,7 @@ const https = require('https');
 const express = require('express');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const devPort = 6180;
+const devPort = 8080;
 
 //Initialize Data
 const dbfile = fs.readFileSync('./db.json');
@@ -25,8 +25,8 @@ if(process.env.NODE_ENV === 'production') {
         // pfx: fs.readFileSync('sslcert/cmann.pfx'),
         // passphrase: 'password'
     };
-    var httpsServer = http.createServer(options,app).listen(80, function(){
-        console.log('server running 80');
+    var httpsServer = http.createServer(options,app).listen(8080, function(){
+        console.log('server running 8080');
     });
 } else {
     // We are running in development mode
@@ -41,7 +41,7 @@ app.all('*', function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://cmann.org");
     }
     else {
-        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        res.header("Access-Control-Allow-Origin", "*");
     }
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -141,5 +141,15 @@ app.get('/api/Content/bros', middleware.checkToken, (req, res) => {
         type: s.type,
         message: s.message,
         creed: s.creed
+    });
+});
+
+app.get('/api/Content/victory', middleware.checkToken, (req, res) => {
+    let s = stages[1];
+    res.json({
+        success: true,
+        type: 'TOP SECRET',
+        message: s.message,
+        creed: 'Congratulations on making it here! We will be taking back our world now. Hang on to something.\t\tPlaceholder.'
     });
 });

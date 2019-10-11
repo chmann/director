@@ -18,7 +18,7 @@
     [@anima_boxBottom]="keyInHole ? 'brokey' : (isBrother ? 'bros' : isOpen ? 'open' : 'closed')">
        <div class="keyHolePosition">
            <app-dragable [image]="'assets/img/Keyhole.png'" [w]="60" [hidden]="!isBrother"
-                        [dropCallback]="handleKeyDrop" [lock]="true">
+                        [dropCallback]="handleKeyDrop" [lock]="true" [dropRoute]="secretPath">
            </app-dragable>
        </div>
    </div>

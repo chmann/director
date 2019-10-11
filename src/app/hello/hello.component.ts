@@ -7,6 +7,7 @@ import { timeout } from 'q';
 import { Timeouts } from 'selenium-webdriver';
 import {ApiService} from './../api.service';
 import { stringify } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hello',
@@ -133,6 +134,7 @@ export class HelloComponent implements OnInit {
   answer = 'c9=C#';//pawn is promoted to Champion for the Checkmate
   hail = '';
   keyInHole = false;
+  secretPath = 'bros';
 
   constructor(private service: ApiService ) { }
 
@@ -220,6 +222,7 @@ export class HelloComponent implements OnInit {
           this.isBrother = true;
           this.title1 = res['title']
           this.hail = res['message'];
+          this.secretPath = 'bros';
           console.log(res['log']);
           localStorage.setItem('tokeN', res['token']);
           setTimeout(() => {
@@ -249,9 +252,12 @@ export class HelloComponent implements OnInit {
     }
     if (this.times.length === 8) {
       this.service.getToken(this.times, 'authvictory').subscribe(res => {
-        if (res['message']) {
+        if (res['success']) {
           this.isOpen = true;
           this.isBrother = true;
+          this.title1 = "VICTORY!!!";
+          this.hail = 'First to the Key...'
+          this.secretPath = 'victory';
           console.log(res['log']);
           localStorage.setItem('tokeN', res['token']);
           setTimeout(() => {
@@ -270,7 +276,7 @@ export class HelloComponent implements OnInit {
     if (this.keyInHole) return;
     this.keyInHole = true;
     setTimeout(() => { this.keyInHole = false; console.log('keyInHole = false');}, 5256);
-    console.log('handle keyDrop');
+    console.log('handle keyDrop', this.secretPath);
   }
 
 }

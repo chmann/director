@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import {DragComponent} from '../drag/drag.component';
 import {DragService} from './../drag.service';
 import {UtilsService} from './../utils.service';
@@ -33,7 +33,7 @@ import { fadeInAnimation } from '../animations';
   ]
 })
 export class DragableComponent extends DragComponent implements OnInit {
-  
+
   constructor(elem: ElementRef, service: DragService, utils: UtilsService, router: Router) { 
     super(elem, service, utils, router);
   }

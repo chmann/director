@@ -11,6 +11,7 @@ import { HelloComponent } from './hello/hello.component';
 import { DragComponent } from './drag/drag.component';
 import { AuthComponent } from './auth/auth.component';
 import { DragableComponent } from './dragable/dragable.component';
+import { VictoryComponent } from './victory/victory.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DragableComponent } from './dragable/dragable.component';
     HelloComponent,
     DragComponent,
     AuthComponent,
-    DragableComponent
+    DragableComponent,
+    VictoryComponent
   ],
   imports: [
     BrowserModule,
