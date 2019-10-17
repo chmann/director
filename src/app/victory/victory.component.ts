@@ -6,7 +6,7 @@ import { fadeInAnimation } from '../animations';
 @Component({
   selector: 'app-victory',
   templateUrl: '../auth/auth.component.html',
-  styleUrls: ['../auth/auth.component.scss'],
+  styleUrls: ['../victory/victory.component.scss'],
   animations: [
     fadeInAnimation
   ]
@@ -16,20 +16,29 @@ export class VictoryComponent implements OnInit {
   classification = "";
   authMessage = "";
   authNote = "";
-  destructTime = 60 * 5;
+  destructTime = 412 * 4 + 339;
   initialized = false;
   footerImage = "";
   authImage = "";
+  authImage2 = "";
+  authImage3 = "";
   scrollingText = "";
-  overrideMessage = "GO";
+  overrideMessage = "SOAR";
   overridePulseRate = 1;
   overridePulsing =  false;
-  showVideo = false;
+  showVideo = true;
   silentCountdown = true;
   timer = 0;
   creedIndex = 0;
   creed = [];
   creedClone = null;
+  showAuthImage1 = true;
+  showAuthImage2 = false;
+  showAuthImage3 = false;
+  videoCode = 'torEytKxkeI';
+  altVideoCode = 'J5jIpAeYwPo';
+  selectedVideo = '';
+  starting = false;
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -46,11 +55,13 @@ export class VictoryComponent implements OnInit {
           this.authMessage = msgs[0];
           this.authNote = msgs[1];
           this.footerImage = '../../assets/img/seal.png';
+          this.authImage2 = '../../assets/img/resist.png';
+          this.authImage3 = '../../assets/img/phx.png';
           if (res["creed"]) {
             this.creed = res["creed"].split('\t');
-            this.scrollingText = this.creed[0];
             var el = document.getElementById('star-wars');
             if (el) {
+              this.scrollingText = this.creed[0];
               this.creedClone = el.cloneNode(true);
               setInterval(() => {
                 this.timer++;
@@ -72,15 +83,7 @@ export class VictoryComponent implements OnInit {
               }, 1000);
             }
             else {
-              el = document.getElementById('scrolling-text');
-              var creedHTML = '';
-              for (var i = 0; i < this.creed.length; i++) {
-                if (creedHTML.length) {
-                  creedHTML += '<br/><br/>'
-                }
-                creedHTML += this.creed[i];
-              }
-              el.innerHTML = creedHTML;
+             
             }
             
           }
@@ -102,28 +105,74 @@ export class VictoryComponent implements OnInit {
             this.overridePulsing = !this.overridePulsing;
           }, 1000 * this.overridePulseRate);
         }
-        setTimeout(() => this.toggleVideo(), 1242);
+        // this.selectedVideo = this.altVideoCode;
+        setTimeout(() => this.autoPlayVideo(), 1242);
         
       }
     });
   }  
 
-  autoPlayVideo() {
-    let vcode = 'J5jIpAeYwPo';
+  toggleAuthImage() {
+    if (this.showAuthImage1) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = true;
+      this.showAuthImage3 = false;
+    }
+    else if (this.showAuthImage2) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = true;
+    }
+    else if (this.showAuthImage3) {
+      this.showAuthImage1 = true;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = false;
+    }
+  }
 
+  autoPlayVideo() {
+    let vcode = this.selectedVideo;
     if (this.showVideo) {
       window.blur();
-      document.getElementById('videoContainer').innerHTML = '<iframe id="videoiframe" class="videoFrame" style="width: 100%; max-width: 500px; opacity: 0.42" src="https://www.youtube.com/embed/'+vcode+'?autoplay=1&loop=1&rel=0&wmode=transparent" frameborder="0" allowfullscreen wmode="Opaque"></iframe>';
+      document.getElementById('videoContainer').innerHTML = '<iframe id="videoiframe" class="videoFrame" style="width: 100%; max-width: 500px; opacity: 0.42" src="https://www.youtube.com/embed/'+vcode+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
     }
     else {
       document.getElementById('videoContainer').innerHTML = '<div></div>';
     }
   }
 
+  startScroll() {
+    if (!this.starting) {
+      this.starting = true;
+
+      setTimeout (() => {
+        var el = document.getElementById('scrolling-text');
+        var creedHTML = '';
+        for (var i = 0; i < this.creed.length; i++) {
+          if (creedHTML.length) {
+            creedHTML += '<br/><br/>'
+          }
+          creedHTML += this.creed[i];
+        }
+        el.innerHTML = creedHTML;
+        this.showVideo = true;
+        this.scrollingText = creedHTML;
+        this.selectedVideo = this.videoCode;
+        this.autoPlayVideo();
+      }, 1212)
+    }
+    
+  }
+
   toggleVideo() {
-    this.showVideo = !this.showVideo;
+    this.showVideo = true;
+    if (this.selectedVideo == this.videoCode) {
+      this.selectedVideo = this.altVideoCode;
+    }
+    else {
+      this.selectedVideo = this.videoCode;
+    }
     this.autoPlayVideo();
-    console.log('did it');
   }
 }
 

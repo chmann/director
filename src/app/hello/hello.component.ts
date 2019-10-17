@@ -17,10 +17,10 @@ import { Router } from '@angular/router';
     trigger('anima_text', [
       state('closed', style({
         color: 'white',
-        backgroundColor: 'black' 
+        backgroundColor: '#101010' 
       })),
       state('open', style({
-        color: 'black',
+        color: '#101010',
         backgroundColor: 'white'
       })),
       transition('closed => open', [
@@ -33,10 +33,10 @@ import { Router } from '@angular/router';
     trigger('anima_boxTop', [
       state('closed', style({
         color: 'white',
-        backgroundColor: 'black' 
+        backgroundColor: '#101010' 
       })),
       state('open', style({
-        color: 'black',
+        color: '#101010',
         backgroundColor: 'white'
       })),
       transition('closed => open', [
@@ -48,12 +48,12 @@ import { Router } from '@angular/router';
     ]),
     trigger('anima_boxBottom', [
       state('closed', style({
-        color: 'black',
+        color: '#101010',
         backgroundColor: 'white'
       })),
       state('open', style({
         color: 'white',
-        backgroundColor: 'black' 
+        backgroundColor: '#101010' 
       })),
       state('bros',style({
         color: '#ffce00',
@@ -131,7 +131,7 @@ export class HelloComponent implements OnInit {
   faChessPawn = faChessPawn;
   title0 = 'Hello World';
   title1 = 'GAME OVER';
-  answer = 'c9=C#';//pawn is promoted to Champion for the Checkmate
+  answer = 'c0=C#';//pawn is promoted to Champion for the Checkmate
   hail = '';
   keyInHole = false;
   secretPath = 'bros';

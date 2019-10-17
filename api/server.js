@@ -145,11 +145,11 @@ app.get('/api/Content/bros', middleware.checkToken, (req, res) => {
 });
 
 app.get('/api/Content/victory', middleware.checkToken, (req, res) => {
-    let s = stages[1];
+    let s = stages[2];
     res.json({
         success: true,
-        type: 'TOP SECRET',
+        type: s.type,
         message: s.message,
-        creed: 'Congratulations on making it here! We will be taking back our world now. Hang on to something.\t\tPlaceholder.'
+        creed: s.creed
     });
 });

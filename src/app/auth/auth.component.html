@@ -5,7 +5,9 @@
     <div class="authMessage" >
       {{authMessage}}
     </div>
-    <img [src]="authImage" class="authImg" />
+    <img [src]="authImage" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage1" [@fade]="showAuthImage1 ? 'post' : 'pre'"/>
+    <img [src]="authImage2" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage2" [@fade]="showAuthImage2 ? 'post' : 'pre'"/>
+    <img [src]="authImage3" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage3" [@fade]="showAuthImage3 ? 'post' : 'pre'"/>
     <marquee id="scrolling-text" behavior="scroll" scrollamount="1.6180" direction="up" style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;"></marquee>
     <!-- <div class="star-wars">
       <div id="star-wars" class="crawl">
@@ -16,6 +18,9 @@
     </div> -->
     <div class ="authNote" [hidden]="destructTime === 0 || silentCountdown">
         {{authNote}} ({{destructTime}}s)
+    </div>
+    <div class="footer startMessage" [hidden]="scrollingText.length > 0">
+      <a (click)="startScroll()" class="startText">START</a>
     </div>
     <div class="footer">
       <a (click)="toggleVideo()"><img [src]="footerImage" class="sealImg" /></a>

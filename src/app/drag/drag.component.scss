@@ -14,12 +14,14 @@
 
 .conflicted {
     background-color: rgb(4, 208, 4) !important;
+    border-radius: 25%;
     &.off {
         background-color: transparent !important;
     }
 }
 .valid {
     background-color: red !important;
+    border-radius: 25%;
 }
 
 .locked {

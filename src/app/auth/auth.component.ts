@@ -21,6 +21,8 @@ export class AuthComponent implements OnInit {
   initialized = false;
   footerImage = "";
   authImage = "";
+  authImage2 = "";
+  authImage3 = "";
   scrollingText = "";
   overrideMessage = "GO";
   overridePulseRate = 1;
@@ -31,6 +33,12 @@ export class AuthComponent implements OnInit {
   creedIndex = 0;
   creed = [];
   creedClone = null;
+  showAuthImage1 = true;
+  showAuthImage2 = false;
+  showAuthImage3 = false;
+  videoCode = '6A2V9Bu80J4';
+  altVideoCode = 'J5jIpAeYwPo';
+  selectedVideo = this.videoCode;
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -86,6 +94,8 @@ export class AuthComponent implements OnInit {
             
           }
           this.authImage = '../../assets/img/learning.png';
+          this.authImage2 = '../../assets/img/resist.png';
+          this.authImage3 = '../../assets/img/phx.png';
           this.initialized = true;
         }, 1000);
 
@@ -103,14 +113,37 @@ export class AuthComponent implements OnInit {
             this.overridePulsing = !this.overridePulsing;
           }, 1000 * this.overridePulseRate);
         }
+        this.selectedVideo = this.altVideoCode;
         setTimeout(() => this.toggleVideo(), 1242);
         
       }
     });
-  }  
+  } 
+  
+  toggleAuthImage() {
+    if (this.showAuthImage1) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = true;
+      this.showAuthImage3 = false;
+    }
+    else if (this.showAuthImage2) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = true;
+    }
+    else if (this.showAuthImage3) {
+      this.showAuthImage1 = true;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = false;
+    }
+  }
+
+  startScroll() {
+    
+  }
 
   autoPlayVideo() {
-    let vcode = 'J5jIpAeYwPo';
+    let vcode = this.selectedVideo;
 
     if (this.showVideo) {
       window.blur();
@@ -122,7 +155,13 @@ export class AuthComponent implements OnInit {
   }
 
   toggleVideo() {
-    this.showVideo = !this.showVideo;
+    this.showVideo = true;
+    if (this.selectedVideo == this.videoCode) {
+      this.selectedVideo = this.altVideoCode;
+    }
+    else {
+      this.selectedVideo = this.videoCode;
+    }
     this.autoPlayVideo();
     console.log('did it');
   }

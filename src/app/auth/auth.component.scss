@@ -41,7 +41,7 @@
 .overrideMessage {
     font-size: 208px;
     position: absolute;
-    top: 208px;
+    top: calc(50% - 114px);
     left: calc(50% + 23px);
     color: red;
     margin-left: -150px;
@@ -55,6 +55,14 @@
     max-width: 500px;
     height: 100px;
     opacity: 0.42;
+}
+
+.startMessage {
+    position: absolute;
+    top: 180px;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 42px;
 }
 
 .footer {
@@ -89,7 +97,7 @@
 @media (min-width: 700px) {
     .overrideMessage {
         top: auto !important;
-        bottom: 208px;
+        bottom: calc(50% - 250px);
         margin-left: -285px;
         font-size: 360px;
     }
