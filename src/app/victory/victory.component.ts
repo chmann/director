@@ -36,9 +36,11 @@ export class VictoryComponent implements OnInit {
   showAuthImage2 = false;
   showAuthImage3 = false;
   videoCode = 'torEytKxkeI';
-  altVideoCode = 'J5jIpAeYwPo';
+  altVideoCode = 'pOVrOuKVBuY';//'J5jIpAeYwPo';
   selectedVideo = '';
   starting = false;
+  videoCodes = ['torEytKxkeI','pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE'];
+  videoIndex = 0;
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -159,19 +161,20 @@ export class VictoryComponent implements OnInit {
         this.scrollingText = creedHTML;
         this.selectedVideo = this.videoCode;
         this.autoPlayVideo();
-      }, 1212)
+      }, 208)
     }
     
   }
 
   toggleVideo() {
     this.showVideo = true;
-    if (this.selectedVideo == this.videoCode) {
-      this.selectedVideo = this.altVideoCode;
+    if (this.videoIndex === this.videoCodes.length - 1){
+      this.videoIndex = 0;
     }
     else {
-      this.selectedVideo = this.videoCode;
+      this.videoIndex++;
     }
+    this.selectedVideo = this.videoCodes[this.videoIndex];
     this.autoPlayVideo();
   }
 }

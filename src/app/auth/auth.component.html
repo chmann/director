@@ -8,7 +8,9 @@
     <img [src]="authImage" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage1" [@fade]="showAuthImage1 ? 'post' : 'pre'"/>
     <img [src]="authImage2" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage2" [@fade]="showAuthImage2 ? 'post' : 'pre'"/>
     <img [src]="authImage3" class="authImg" (click)="toggleAuthImage()" [hidden]="!showAuthImage3" [@fade]="showAuthImage3 ? 'post' : 'pre'"/>
-    <marquee id="scrolling-text" behavior="scroll" scrollamount="1.6180" direction="up" style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;"></marquee>
+    <div style="margin: 4px; background-color: rgba(4,4,4,0.42);">
+    <marquee id="scrolling-text" behavior="scroll" scrollamount="1.6180" direction="up" style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold; "></marquee>
+    </div>
     <!-- <div class="star-wars">
       <div id="star-wars" class="crawl">
         <p>

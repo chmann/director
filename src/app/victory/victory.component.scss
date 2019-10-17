@@ -75,6 +75,10 @@
     }
 }
 
+.scrollLogo {
+    width: 200px;
+}
+
 .footer {
     position: absolute;
     bottom: 10px;
@@ -83,7 +87,7 @@
     /* left: calc(50% - 73px); */
 }
 
-@media (max-width: 699px) {
+@media (max-width: 99px) {
     .authComponent {
        background: url('/assets/img/m_launch_dark.jpg') no-repeat center center fixed;
     }
@@ -104,7 +108,7 @@
     max-height: 100px;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 100px) {
     .overrideMessage {
         top: auto !important;
         bottom: calc(50% - 125px);
