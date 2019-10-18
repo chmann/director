@@ -39,12 +39,10 @@
 }
 
 .overrideMessage {
-    font-size: 208px;
+    font-size: 104px;
     position: absolute;
-    top: calc(50% - 114px);
-    left: calc(50% + 23px);
+    left: calc(50%);
     color: red;
-    margin-left: -150px;
 }
 
 
@@ -63,6 +61,20 @@
     text-decoration: underline;
     font-weight: bold;
     font-size: 42px;
+    z-index: 3;
+
+    .startText {
+        cursor: pointer;
+
+        &:hover {
+            color: gold;
+            font-weight: bolder;
+        }
+    }
+}
+
+.scrollLogo {
+    width: 200px;
 }
 
 .footer {
@@ -73,7 +85,7 @@
     /* left: calc(50% - 73px); */
 }
 
-@media (max-width: 699px) {
+@media (max-width: 99px) {
     .authComponent {
        background: url('/assets/img/m_launch_dark.jpg') no-repeat center center fixed;
     }
@@ -94,12 +106,14 @@
     max-height: 100px;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 100px) {
     .overrideMessage {
         top: auto !important;
-        bottom: calc(50% - 250px);
-        margin-left: -285px;
-        font-size: 360px;
+        bottom: 223px;
+        left: auto !important;
+        width: 100%;
+        text-align: center;
+        font-size: 180px;
     }
 
     .videoContainer {

@@ -41,10 +41,8 @@
 .overrideMessage {
     font-size: 104px;
     position: absolute;
-    top: calc(50% - 114px);
-    left: calc(50% + 23px);
+    left: calc(50%);
     color: red;
-    margin-left: -150px;
 }
 
 
@@ -111,8 +109,10 @@
 @media (min-width: 100px) {
     .overrideMessage {
         top: auto !important;
-        bottom: calc(50% - 125px);
-        left: calc(50% - 102px);
+        bottom: 300px;
+        left: auto !important;
+        width: 100%;
+        text-align: center;
         font-size: 180px;
     }
 

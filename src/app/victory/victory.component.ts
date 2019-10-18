@@ -37,10 +37,10 @@ export class VictoryComponent implements OnInit {
   showAuthImage3 = false;
   videoCode = 'torEytKxkeI';
   altVideoCode = 'pOVrOuKVBuY';//'J5jIpAeYwPo';
-  selectedVideo = '';
   starting = false;
-  videoCodes = ['torEytKxkeI','pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE'];
+  videoCodes = ['torEytKxkeI','pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE','zemjJhquxH8', 'ZH65WNJ6b4Q', 'LZngavkVeO4'];
   videoIndex = 0;
+  selectedVideo = '';
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -146,7 +146,7 @@ export class VictoryComponent implements OnInit {
   startScroll() {
     if (!this.starting) {
       this.starting = true;
-
+      this.selectedVideo = this.videoCodes[this.videoIndex];
       setTimeout (() => {
         var el = document.getElementById('scrolling-text');
         var creedHTML = '';
@@ -157,21 +157,33 @@ export class VictoryComponent implements OnInit {
           creedHTML += this.creed[i];
         }
         el.innerHTML = creedHTML;
+        el.setAttribute('aria-label', this.screenReaderText());
         this.showVideo = true;
         this.scrollingText = creedHTML;
-        this.selectedVideo = this.videoCode;
         this.autoPlayVideo();
       }, 208)
     }
     
   }
 
-  toggleVideo() {
+  screenReaderText() {
+    var final:string = '';
+    var text:string = this.creed.join();
+    var escape = false;
+    for (var i = 0; i < text.length; i++) {
+      if (text[i] === '<') escape = true;
+      if (!escape) final += text[i];
+      if (text[i] === '>') escape = false;
+    }
+    return final;
+  }
+
+  toggleVideo(skipIncrement:boolean = false) {
     this.showVideo = true;
     if (this.videoIndex === this.videoCodes.length - 1){
       this.videoIndex = 0;
     }
-    else {
+    else if (!skipIncrement) {
       this.videoIndex++;
     }
     this.selectedVideo = this.videoCodes[this.videoIndex];
