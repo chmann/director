@@ -23,6 +23,7 @@ export class AuthComponent implements OnInit {
   authImage = "";
   authImage2 = "";
   authImage3 = "";
+  authImage4 = "";
   scrollingText = "";
   overrideMessage = "GO";
   overridePulseRate = 1;
@@ -36,9 +37,11 @@ export class AuthComponent implements OnInit {
   showAuthImage1 = true;
   showAuthImage2 = false;
   showAuthImage3 = false;
+  showAuthImage4 = false;
   videoCode = '6A2V9Bu80J4';
   altVideoCode = 'J5jIpAeYwPo';
   selectedVideo = this.videoCode;
+  starting = false;
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -96,6 +99,7 @@ export class AuthComponent implements OnInit {
           this.authImage = '../../assets/img/learning.png';
           this.authImage2 = '../../assets/img/resist.png';
           this.authImage3 = '../../assets/img/phx.png';
+          this.authImage4 = '../../assets/img/fcfullcolor.png';
           this.initialized = true;
         }, 1000);
 
@@ -114,8 +118,7 @@ export class AuthComponent implements OnInit {
           }, 1000 * this.overridePulseRate);
         }
         this.selectedVideo = this.altVideoCode;
-        setTimeout(() => this.toggleVideo(), 1242);
-        
+        setTimeout(() => {this.toggleVideo(); this.startScroll();}, 1242);
       }
     });
   } 
@@ -125,21 +128,66 @@ export class AuthComponent implements OnInit {
       this.showAuthImage1 = false;
       this.showAuthImage2 = true;
       this.showAuthImage3 = false;
+      this.showAuthImage4 = false;
     }
     else if (this.showAuthImage2) {
       this.showAuthImage1 = false;
       this.showAuthImage2 = false;
       this.showAuthImage3 = true;
+      this.showAuthImage4 = false;
     }
     else if (this.showAuthImage3) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = false;
+      this.showAuthImage4 = true;
+    }
+    else if (this.showAuthImage4) {
       this.showAuthImage1 = true;
       this.showAuthImage2 = false;
       this.showAuthImage3 = false;
+      this.showAuthImage4 = false;
     }
   }
 
   startScroll() {
-    
+    if (!this.starting) {
+      this.starting = true;
+      setTimeout (() => {
+        var el = document.getElementById('scrolling-text');
+        var creedHTML = '';
+        for (var i = 0; i < this.creed.length; i++) {
+          if (creedHTML.length) {
+            creedHTML += '<br/><br/>'
+          }
+          creedHTML += this.creed[i];
+        }
+        el.innerHTML = '<div style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
+        el.setAttribute('aria-label', this.screenReaderText());
+        this.showVideo = true;
+        this.scrollingText = creedHTML;
+        this.autoPlayVideo();
+        setTimeout(this.startScrollAnimation, 1680)
+        
+      }, 208)
+    }
+  }
+
+  screenReaderText() {
+    var final:string = '';
+    var text:string = this.creed.join();
+    var escape = false;
+    for (var i = 0; i < text.length; i++) {
+      if (text[i] === '<') escape = true;
+      if (!escape) final += text[i];
+      if (text[i] === '>') escape = false;
+    }
+    return final;
+  }
+
+  startScrollAnimation() {
+    var el = document.getElementById('scrolling-text');
+    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 87);
   }
 
   autoPlayVideo() {

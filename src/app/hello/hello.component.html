@@ -1,7 +1,7 @@
 <div class="comp" tabindex="0" (keydown)="handleKeydown($event)" (keyup)="handleKeyup($event)">
   <div class="box" [@anima_boxTop]="isOpen ? 'open' : 'closed'">
     
-    <div class="pgn" [hidden]="isBrother"><a href="https://en.wikipedia.org/wiki/Omega_Chess" style="color: #101010; text-decoration: none;">{{isOpen ? answer : ''}}</a></div>
+    <div class="pgn" id="topHelloWorldBox" [hidden]="isBrother"><a href="https://en.wikipedia.org/wiki/Omega_Chess" style="color: #101010; text-decoration: none;">{{isOpen ? answer : ''}}</a></div>
     <div class="pgn bros">{{isBrother ? hail : ''}}</div>
     
     <div class="absText" 

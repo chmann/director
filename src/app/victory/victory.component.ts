@@ -22,6 +22,7 @@ export class VictoryComponent implements OnInit {
   authImage = "";
   authImage2 = "";
   authImage3 = "";
+  authImage4 = "";
   scrollingText = "";
   overrideMessage = "SOAR";
   overridePulseRate = 1;
@@ -35,10 +36,11 @@ export class VictoryComponent implements OnInit {
   showAuthImage1 = true;
   showAuthImage2 = false;
   showAuthImage3 = false;
+  showAuthImage4 = false;
   videoCode = 'torEytKxkeI';
   altVideoCode = 'pOVrOuKVBuY';//'J5jIpAeYwPo';
   starting = false;
-  videoCodes = ['torEytKxkeI','pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE','zemjJhquxH8', 'ZH65WNJ6b4Q', 'LZngavkVeO4'];
+  videoCodes = ['torEytKxkeI'];//,'pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE','zemjJhquxH8', 'ZH65WNJ6b4Q', 'LZngavkVeO4', 'Y1UiD2sxoWo'];
   videoIndex = 0;
   selectedVideo = '';
 
@@ -52,6 +54,9 @@ export class VictoryComponent implements OnInit {
       else {
         this.valid = true;
         this.classification = res['type'];
+        if (res["codes"] && res["codes"].length) {
+          this.videoCodes = res["codes"];
+        }
         let msgs = res['message'].split('|');
         setTimeout(() => {
           this.authMessage = msgs[0];
@@ -59,6 +64,7 @@ export class VictoryComponent implements OnInit {
           this.footerImage = '../../assets/img/seal.png';
           this.authImage2 = '../../assets/img/resist.png';
           this.authImage3 = '../../assets/img/phx.png';
+          this.authImage4 = '../../assets/img/fcfull.png';
           if (res["creed"]) {
             this.creed = res["creed"].split('\t');
             var el = document.getElementById('star-wars');
@@ -84,11 +90,8 @@ export class VictoryComponent implements OnInit {
                 }
               }, 1000);
             }
-            else {
-             
-            }
-            
           }
+         
           this.authImage = '../../assets/img/ee.png';
           this.initialized = true;
         }, 1000);
@@ -119,16 +122,25 @@ export class VictoryComponent implements OnInit {
       this.showAuthImage1 = false;
       this.showAuthImage2 = true;
       this.showAuthImage3 = false;
+      this.showAuthImage4 = false;
     }
     else if (this.showAuthImage2) {
       this.showAuthImage1 = false;
       this.showAuthImage2 = false;
       this.showAuthImage3 = true;
+      this.showAuthImage4 = false;
     }
     else if (this.showAuthImage3) {
+      this.showAuthImage1 = false;
+      this.showAuthImage2 = false;
+      this.showAuthImage3 = false;
+      this.showAuthImage4 = true;
+    }
+    else if (this.showAuthImage4) {
       this.showAuthImage1 = true;
       this.showAuthImage2 = false;
       this.showAuthImage3 = false;
+      this.showAuthImage4 = false;
     }
   }
 
@@ -156,14 +168,21 @@ export class VictoryComponent implements OnInit {
           }
           creedHTML += this.creed[i];
         }
-        el.innerHTML = creedHTML;
+        el.innerHTML = '<div style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
         el.setAttribute('aria-label', this.screenReaderText());
         this.showVideo = true;
         this.scrollingText = creedHTML;
         this.autoPlayVideo();
+        setTimeout(this.startScrollAnimation, 3142)
+        
       }, 208)
     }
     
+  }
+
+  startScrollAnimation() {
+    var el = document.getElementById('scrolling-text');
+    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 42);
   }
 
   screenReaderText() {

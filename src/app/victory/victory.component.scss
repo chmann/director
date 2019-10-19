@@ -106,6 +106,18 @@
     max-height: 100px;
 }
 
+@media (max-height: 760px) {
+    .overrideMessage {
+        bottom: 118px !important;
+    }
+}
+
+@media (min-height: 900px) {
+    .overrideMessage {
+        bottom: calc(50% - 100px) !important;
+    }
+}
+
 @media (min-width: 100px) {
     .overrideMessage {
         top: auto !important;
@@ -134,6 +146,18 @@
     .showVideo {
         height: 290px;
     }
+ }
+
+ .scrollingTextFrame {
+    max-height: 242px;
+    margin: 4px; 
+    background-color: rgba(4,4,4,0.42);
+ }
+
+ .scrollingText {
+    height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;
+    max-height: 242px;
+    overflow: auto;
  }
 
  //Courtesy of CSS-Tricks: https://css-tricks.com/snippets/css/star-wars-crawl-text/

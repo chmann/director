@@ -139,7 +139,9 @@ export class HelloComponent implements OnInit {
   constructor(private service: ApiService ) { }
 
   ngOnInit() {
-    setTimeout(() => window.scrollTo(0,1), 1000); 
+    setTimeout(() => {
+      window.scrollTo(0,1);
+    }, 1000); 
   }
 
   handleTouchStart(event) {
@@ -255,7 +257,7 @@ export class HelloComponent implements OnInit {
         if (res['success']) {
           this.isOpen = true;
           this.isBrother = true;
-          this.title1 = "VICTORY!!!";
+          this.title1 = "VICTORY!!!!";
           this.hail = 'First to the Key...'
           this.secretPath = 'victory';
           console.log(res['log']);

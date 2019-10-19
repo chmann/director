@@ -12,10 +12,19 @@ const bodyParser = require('body-parser');
 const devPort = 8080;
 
 //Initialize Data
-const dbfile = fs.readFileSync('./db.json');
+var dbfile = fs.readFileSync('./db.json');
 var db = JSON.parse(dbfile);
 var stages = db.stages;
+var lastLoadTime = new Date();
+var self = this;
 
+function reloadDatabase() {
+    // if (new Date() - self.lastLoadTime < 118) return;
+    // self.dbfile = fs.readFileSync('./db.json');
+    // self.db = JSON.parse(self.dbfile);
+    // self.stages = self.db.stages;
+    // self.lastLoadTime = new Date();
+}
 //Start Server
 const app = express();
 app.use(compression());
@@ -52,6 +61,7 @@ app.use(bodyParser.json());
 
 //Public API
 app.get('/api/authbros/*',(req, res) => {
+    reloadDatabase();
     let times = req.params.split ? req.params.split('/') : req.params[0].split('/');
     let thresh = 142;
     let t0 = times[0];
@@ -82,6 +92,7 @@ app.get('/api/authbros/*',(req, res) => {
 });
 
 app.get('/api/authvictory/*',(req, res) => {
+    reloadDatabase();
     let times = req.params.split ? req.params.split('/') : req.params[0].split('/');
     let thresh = 42;
     let thresh1 = 142;
@@ -150,6 +161,7 @@ app.get('/api/Content/victory', middleware.checkToken, (req, res) => {
         success: true,
         type: s.type,
         message: s.message,
-        creed: s.creed
+        creed: s.creed,
+        codes: s.codes
     });
 });
