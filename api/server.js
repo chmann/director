@@ -151,7 +151,8 @@ app.get('/api/Content/bros', middleware.checkToken, (req, res) => {
         success: true,
         type: s.type,
         message: s.message,
-        creed: s.creed
+        creed: s.creed,
+        codes: s.codes
     });
 });
 

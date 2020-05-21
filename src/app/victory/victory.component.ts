@@ -67,31 +67,7 @@ export class VictoryComponent implements OnInit {
           this.authImage4 = '../../assets/img/fcfull.png';
           if (res["creed"]) {
             this.creed = res["creed"].split('\t');
-            var el = document.getElementById('star-wars');
-            if (el) {
-              this.scrollingText = this.creed[0];
-              this.creedClone = el.cloneNode(true);
-              setInterval(() => {
-                this.timer++;
-                if (this.timer > 36) {
-                  this.timer = 0;
-                  var temp = this.scrollingText;
-                  if (this.creedIndex >= this.creed.length) {
-                    this.creedIndex = 0;
-                  }
-                  this.scrollingText = this.creed[this.creedIndex++];
-                  el = document.getElementById('star-wars');
-                  console.log('here we are');
-                  setTimeout(() => {
-                    el.style.animation = 'none';
-                    el.offsetHeight; /* trigger reflow */
-                    el.style.animation = null;                     
-                  }, 118);
-                }
-              }, 1000);
-            }
           }
-         
           this.authImage = '../../assets/img/ee.png';
           this.initialized = true;
         }, 1000);
@@ -168,7 +144,7 @@ export class VictoryComponent implements OnInit {
           }
           creedHTML += this.creed[i];
         }
-        el.innerHTML = '<div style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
+        el.innerHTML = '<div style="height:242px; text-align: center; max-inline-size: 1011px; margin: 0 auto; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
         el.setAttribute('aria-label', this.screenReaderText());
         this.showVideo = true;
         this.scrollingText = creedHTML;
@@ -182,7 +158,7 @@ export class VictoryComponent implements OnInit {
 
   startScrollAnimation() {
     var el = document.getElementById('scrolling-text');
-    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 42);
+    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 69);
   }
 
   screenReaderText() {
