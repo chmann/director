@@ -57,7 +57,7 @@ import { Router } from '@angular/router';
       })),
       state('bros',style({
         color: '#ffce00',
-        backgroundColor: '#E4E7E9' 
+        backgroundColor: '#091833' 
       })),
       state('brokey',style({
         color: '#ffce00',
@@ -119,8 +119,8 @@ import { Router } from '@angular/router';
   ]
 })
 export class HelloComponent implements OnInit {
-  isOpen = true;
-  isBrother = true;
+  isOpen = false;
+  isBrother = false;
   shifted = false;
   triggerd = false;
   triggerDown = false;
@@ -130,7 +130,7 @@ export class HelloComponent implements OnInit {
   count = 0;
   faChessPawn = faChessPawn;
   title0 = 'Hello World';
-  title1 = 'Drag & Drop Demo';
+  title1 = 'GAME OVER';
   answer = 'c0=C#';//pawn is promoted to Champion for the Checkmate
   hail = '';
   keyInHole = false;

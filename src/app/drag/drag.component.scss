@@ -13,14 +13,14 @@
 }
 
 .conflicted {
-    background-color: #bf0202 !important;
+    background-color: rgb(4, 208, 4) !important;
     border-radius: 25%;
     &.off {
         background-color: transparent !important;
     }
 }
 .valid {
-    background-color: rgb(4, 208, 4)  !important;
+    background-color: red !important;
     border-radius: 25%;
 }
 
@@ -37,5 +37,4 @@
     width: 100%;
     height: 100%;
     opacity: 1 !important;
-    border: 1px solid #e07e26;
 }

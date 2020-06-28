@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
   classification = "";
   authMessage = "";
   authNote = "";
-  destructTime = 412 * 4 + 339;
+  destructTime = 60 * 5;
   initialized = false;
   footerImage = "";
   authImage = "";
@@ -25,10 +25,10 @@ export class AuthComponent implements OnInit {
   authImage3 = "";
   authImage4 = "";
   scrollingText = "";
-  overrideMessage = "ROAR";
+  overrideMessage = "GO";
   overridePulseRate = 1;
   overridePulsing =  false;
-  showVideo = true;
+  showVideo = false;
   silentCountdown = true;
   timer = 0;
   creedIndex = 0;
@@ -39,11 +39,9 @@ export class AuthComponent implements OnInit {
   showAuthImage3 = false;
   showAuthImage4 = false;
   videoCode = '6A2V9Bu80J4';
-  altVideoCode = 'pOVrOuKVBuY';//'J5jIpAeYwPo';
+  altVideoCode = 'J5jIpAeYwPo';
+  selectedVideo = this.videoCode;
   starting = false;
-  videoCodes = ['6A2V9Bu80J4'];//,'pOVrOuKVBuY','J5jIpAeYwPo','N9XCBNhw9JE','zemjJhquxH8', 'ZH65WNJ6b4Q', 'LZngavkVeO4', 'Y1UiD2sxoWo'];
-  videoIndex = 0;
-  selectedVideo = '';
 
   constructor(private service : ApiService, private router: Router) { }
 
@@ -55,21 +53,53 @@ export class AuthComponent implements OnInit {
       else {
         this.valid = true;
         this.classification = res['type'];
-        if (res["codes"] && res["codes"].length) {
-          this.videoCodes = res["codes"];
-        }
         let msgs = res['message'].split('|');
         setTimeout(() => {
           this.authMessage = msgs[0];
           this.authNote = msgs[1];
           this.footerImage = '../../assets/img/seal.png';
+          if (res["creed"]) {
+            this.creed = res["creed"].split('\t');
+            this.scrollingText = this.creed[0];
+            var el = document.getElementById('star-wars');
+            if (el) {
+              this.creedClone = el.cloneNode(true);
+              setInterval(() => {
+                this.timer++;
+                if (this.timer > 36) {
+                  this.timer = 0;
+                  var temp = this.scrollingText;
+                  if (this.creedIndex >= this.creed.length) {
+                    this.creedIndex = 0;
+                  }
+                  this.scrollingText = this.creed[this.creedIndex++];
+                  el = document.getElementById('star-wars');
+                  console.log('here we are');
+                  setTimeout(() => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; /* trigger reflow */
+                    el.style.animation = null;                     
+                  }, 118);
+                }
+              }, 1000);
+            }
+            else {
+              el = document.getElementById('scrolling-text');
+              var creedHTML = '';
+              for (var i = 0; i < this.creed.length; i++) {
+                if (creedHTML.length) {
+                  creedHTML += '<br/><br/>'
+                }
+                creedHTML += this.creed[i];
+              }
+              el.innerHTML = creedHTML;
+            }
+            
+          }
           this.authImage = '../../assets/img/learning.png';
           this.authImage2 = '../../assets/img/resist.png';
           this.authImage3 = '../../assets/img/phx.png';
           this.authImage4 = '../../assets/img/fcfullcolor.png';
-          if (res["creed"]) {
-            this.creed = res["creed"].split('\t');
-          }
           this.initialized = true;
         }, 1000);
 
@@ -87,13 +117,12 @@ export class AuthComponent implements OnInit {
             this.overridePulsing = !this.overridePulsing;
           }, 1000 * this.overridePulseRate);
         }
-        // this.selectedVideo = this.altVideoCode;
-        setTimeout(() => this.autoPlayVideo(), 1242);
-        
+        this.selectedVideo = this.altVideoCode;
+        setTimeout(() => {this.toggleVideo(); this.startScroll();}, 1242);
       }
     });
-  }  
-
+  } 
+  
   toggleAuthImage() {
     if (this.showAuthImage1) {
       this.showAuthImage1 = false;
@@ -114,7 +143,6 @@ export class AuthComponent implements OnInit {
       this.showAuthImage4 = true;
     }
     else if (this.showAuthImage4) {
-      this.router.navigate(['/', 'victory']);
       this.showAuthImage1 = true;
       this.showAuthImage2 = false;
       this.showAuthImage3 = false;
@@ -122,21 +150,9 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  autoPlayVideo() {
-    let vcode = this.selectedVideo;
-    if (this.showVideo) {
-      window.blur();
-      document.getElementById('videoContainer').innerHTML = '<iframe id="videoiframe" class="videoFrame" style="width: 100%; max-width: 500px; opacity: 0.42" src="https://www.youtube.com/embed/'+vcode+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
-    }
-    else {
-      document.getElementById('videoContainer').innerHTML = '<div></div>';
-    }
-  }
-
   startScroll() {
     if (!this.starting) {
       this.starting = true;
-      this.selectedVideo = this.videoCodes[this.videoIndex];
       setTimeout (() => {
         var el = document.getElementById('scrolling-text');
         var creedHTML = '';
@@ -146,21 +162,15 @@ export class AuthComponent implements OnInit {
           }
           creedHTML += this.creed[i];
         }
-        el.innerHTML = '<div style="height:242px; text-align: center; max-inline-size: 1011px; margin: 0 auto; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
+        el.innerHTML = '<div style="height:242px; max-width: 1242px; font-size: 0.6180em; padding: 0 1.6180em; color: gold;">' + creedHTML + '</div>';
         el.setAttribute('aria-label', this.screenReaderText());
         this.showVideo = true;
         this.scrollingText = creedHTML;
         this.autoPlayVideo();
-        setTimeout(this.startScrollAnimation, 3142)
+        setTimeout(this.startScrollAnimation, 1680)
         
       }, 208)
     }
-    
-  }
-
-  startScrollAnimation() {
-    var el = document.getElementById('scrolling-text');
-    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 69);
   }
 
   screenReaderText() {
@@ -175,15 +185,32 @@ export class AuthComponent implements OnInit {
     return final;
   }
 
-  toggleVideo(skipIncrement:boolean = false) {
+  startScrollAnimation() {
+    var el = document.getElementById('scrolling-text');
+    setInterval(() => {if (el.scrollTop < el.scrollHeight - el.clientHeight) el.scrollTop++; else {el.scrollTop = 0}}, 87);
+  }
+
+  autoPlayVideo() {
+    let vcode = this.selectedVideo;
+
+    if (this.showVideo) {
+      window.blur();
+      document.getElementById('videoContainer').innerHTML = '<iframe id="videoiframe" class="videoFrame" style="width: 100%; max-width: 500px; opacity: 0.42" src="https://www.youtube.com/embed/'+vcode+'?autoplay=1&loop=1&rel=0&wmode=transparent" frameborder="0" allowfullscreen wmode="Opaque"></iframe>';
+    }
+    else {
+      document.getElementById('videoContainer').innerHTML = '<div></div>';
+    }
+  }
+
+  toggleVideo() {
     this.showVideo = true;
-    if (this.videoIndex === this.videoCodes.length - 1){
-      this.videoIndex = 0;
+    if (this.selectedVideo == this.videoCode) {
+      this.selectedVideo = this.altVideoCode;
     }
-    else if (!skipIncrement) {
-      this.videoIndex++;
+    else {
+      this.selectedVideo = this.videoCode;
     }
-    this.selectedVideo = this.videoCodes[this.videoIndex];
     this.autoPlayVideo();
+    console.log('did it');
   }
 }

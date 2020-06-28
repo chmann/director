@@ -42,7 +42,7 @@ export class DragComponent implements OnInit {
   @Input() preventDrop = true;
   @Input() conflicted = false;
   @Input() overValidTarget = false;
-  @Input() dropRoute = 'test';
+  @Input() dropRoute = 'bros';
   
 
   top = 0; 
@@ -104,7 +104,7 @@ export class DragComponent implements OnInit {
     if (this['obj']) {
       this['obj'].isTriggered = true;
       console.log('secretPath:', this['obj'].dropRoute);
-//setTimeout(() => {this['obj'].isTriggered = false; this['obj'].router.navigate(['/', this['obj'].dropRoute]);}, 5256);
+      setTimeout(() => {this['obj'].isTriggered = false; this['obj'].router.navigate(['/', this['obj'].dropRoute]);}, 5256);
     }
   }
 
